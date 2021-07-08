@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .center{
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+
+        .wrapper {
+            width: 80%;
+            border: 3px solid #000;
+            overflow: hidden;
+        }
+
+        .carousel-list {
+            height: 400px;
+            display: flex;
+        }
+
+        .carousel-item {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .btn{
+            position: absolute;
+            top: 50%;
+        }
+
+        .prev-btn{
+            left: 12%;
+        }
+        .next-btn{
+            right: 12%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="center">
+        <div class="wrapper">
+            <div class="carousel-list">
+                <img src="./img/image-1-min.jpg" class="carousel-item" alt="">       
+                <img src="./img/image-2-min.jpg" class="carousel-item" alt="">       
+                <img src="./img/image-3-min.jpg" class="carousel-item" alt="">       
+                <img src="./img/image-4-min.jpg" class="carousel-item" alt="">       
+                 
+            </div>
+        </div>
+    </div>
+    <button class="prev-btn btn">Prev</button>
+    <button class="next-btn btn">Next</button>
+    
+    <script>
+        const carouselList = document.querySelector('.carousel-list')
+        const carouselItem = document.querySelectorAll('.carousel-item')
+
+        const nextBtn = document.querySelector('.next-btn')
+        const prevBtn = document.querySelector('.prev-btn')
+
+
+        let counter = 0
+
+        nextBtn.addEventListener('click', () => {
+            counter++;
+            if(counter >= carouselItem.length){
+                carouselList.style.transform = `translateX(+${0}px)`
+                counter = 0
+            } else {
+                console.log("hai");
+                carouselList.style.transition = 'transform 0.4s ease-in-out'
+                console.log(counter);
+                carouselList.style.transform = `translateX(-${carouselItem[0].clientWidth*counter}px)`
+            }
+        })
+
+        prevBtn.addEventListener('click', () => {
+            counter--;
+            if(counter < 0){
+                console.log(counter + "HAHAHs");
+                console.log(carouselItem.length + "iini");
+                carouselList.style.transform = `translateX(-${carouselItem[0].clientWidth * (carouselItem.length - 1)}px)`
+                counter = carouselItem.length - 1
+            } else {
+                console.log("hai");
+                carouselList.style.transition = 'transform 0.4s ease-in-out'
+                console.log(counter);
+                carouselList.style.transform = `translateX(-${carouselItem[0].clientWidth*counter}px)`
+            }
+        })
+
+        window.addEventListener('resize', () => {
+            console.log("windows resize");
+            carouselList.style.transition = 'none'
+            carouselList.style.transform = `translateX(${-carouselItem[0].clientWidth * counter}px)`
+        })
+    </script>
+</body>
+</html>
