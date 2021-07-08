@@ -77,9 +77,7 @@
                 carouselList.style.transform = `translateX(+${0}px)`
                 counter = 0
             } else {
-                console.log("hai");
                 carouselList.style.transition = 'transform 0.4s ease-in-out'
-                console.log(counter);
                 carouselList.style.transform = `translateX(-${carouselItem[0].clientWidth*counter}px)`
             }
         })
@@ -87,20 +85,15 @@
         prevBtn.addEventListener('click', () => {
             counter--;
             if(counter < 0){
-                console.log(counter + "HAHAHs");
-                console.log(carouselItem.length + "iini");
                 carouselList.style.transform = `translateX(-${carouselItem[0].clientWidth * (carouselItem.length - 1)}px)`
                 counter = carouselItem.length - 1
             } else {
-                console.log("hai");
                 carouselList.style.transition = 'transform 0.4s ease-in-out'
-                console.log(counter);
                 carouselList.style.transform = `translateX(-${carouselItem[0].clientWidth*counter}px)`
             }
         })
 
         window.addEventListener('resize', () => {
-            console.log("windows resize");
             carouselList.style.transition = 'none'
             carouselList.style.transform = `translateX(${-carouselItem[0].clientWidth * counter}px)`
         })
